@@ -1,14 +1,12 @@
-"""Wipe the documents table and re-ingest all fixtures into SQLite.
+"""Wipe the documents + chunks tables and re-ingest all fixtures into SQLite.
 
 Usage:
     python scripts/ingest.py
 
-Reads JSON fixtures from data/fixtures/{gmail,gcal,linear,slack}.json,
-normalizes them through the per-source connectors, and writes Documents
-to the SQLite store. FTS5 stays in sync via the schema's triggers.
-
-This is intentionally destructive (DELETE FROM documents at the start)
-so reviewers get a clean, reproducible state on every run.
+After upserting documents from each connector, runs a single batched pass that
+chunks every body and embeds all chunks in one call to the embedder. Single-
+batch is meaningfully faster than per-document calls (model overhead dominates
+small batches).
 """
 
 from __future__ import annotations
@@ -22,8 +20,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.config import settings  # noqa: E402
+from app.embed.embedder import encode  # noqa: E402
 from app.models import Document  # noqa: E402
+from app.retrieve.chunker import chunk_document  # noqa: E402
 from app.store.db import connect, init_db  # noqa: E402
+from app.store.repository import clear_chunks, insert_chunk  # noqa: E402
 
 CONNECTORS: list[tuple[str, str]] = [
     ("gmail",  "gmail.json"),
@@ -49,7 +50,7 @@ ON CONFLICT(id) DO UPDATE SET
 """
 
 
-def upsert(conn, doc: Document) -> None:
+def upsert_document(conn, doc: Document) -> None:
     conn.execute(_UPSERT_SQL, doc.to_row())
 
 
@@ -61,10 +62,12 @@ def main() -> int:
 
     started = time.perf_counter()
     counts: Counter[str] = Counter()
+    pending_docs: list[tuple[str, str | None, str]] = []
 
     with connect() as conn:
         conn.execute("BEGIN")
         conn.execute("DELETE FROM documents")
+        clear_chunks(conn)
 
         for source, filename in CONNECTORS:
             path = fixtures_dir / filename
@@ -73,19 +76,37 @@ def main() -> int:
                 continue
             module = importlib.import_module(f"app.ingest.{source}")
             for doc in module.load(path):
-                upsert(conn, doc)
+                upsert_document(conn, doc)
+                pending_docs.append((doc.id, doc.title, doc.body))
                 counts[source] += 1
             print(f"  [ok]   {source:<6} -- {counts[source]:>3} documents from {filename}")
 
+        print("\nChunking + embedding…")
+        embed_started = time.perf_counter()
+        all_chunks: list[tuple[str, int, str]] = []
+        for doc_id, title, body in pending_docs:
+            for ch in chunk_document(title, body):
+                all_chunks.append((doc_id, ch.index, ch.text))
+
+        if all_chunks:
+            texts = [t for _, _, t in all_chunks]
+            vectors = encode(texts)
+            for (doc_id, idx, text), vec in zip(all_chunks, vectors, strict=True):
+                insert_chunk(conn, doc_id, idx, text, vec)
+
         conn.execute("COMMIT")
 
-        total_row = conn.execute("SELECT COUNT(*) AS n FROM documents").fetchone()
-        fts_row = conn.execute("SELECT COUNT(*) AS n FROM documents_fts").fetchone()
+        total_row    = conn.execute("SELECT COUNT(*) AS n FROM documents").fetchone()
+        chunk_row    = conn.execute("SELECT COUNT(*) AS n FROM chunks").fetchone()
+        embedded_row = conn.execute("SELECT COUNT(*) AS n FROM chunks WHERE embedding IS NOT NULL").fetchone()
+        fts_row      = conn.execute("SELECT COUNT(*) AS n FROM documents_fts").fetchone()
 
     elapsed = time.perf_counter() - started
+    embed_elapsed = time.perf_counter() - embed_started
+    print(f"  chunks: {chunk_row['n']} (embedded: {embedded_row['n']})  in {embed_elapsed:.2f}s")
     print(f"\nTotal documents in store: {total_row['n']}")
     print(f"FTS5 rows:                {fts_row['n']}")
-    print(f"Elapsed:                  {elapsed:.2f}s")
+    print(f"Elapsed (total):          {elapsed:.2f}s")
     return 0
 
 
