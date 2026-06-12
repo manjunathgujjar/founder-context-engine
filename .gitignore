@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Project artifacts
+data/app.db
+data/app.db-wal
+data/app.db-shm
+data/.cache/
+.pytest_cache/
+.ruff_cache/
+
+# Models cached by sentence-transformers
+.hf_cache/
