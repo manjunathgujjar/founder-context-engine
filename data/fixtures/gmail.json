@@ -1,0 +1,252 @@
+{
+  "workspace": "pierside",
+  "mailbox": "maya@pierside.io",
+  "_meta": {
+    "body_encoding": "plaintext",
+    "note": "Real Gmail API returns body.data as base64url-encoded. Fixture pre-decodes for readability; connector handles both."
+  },
+  "exported_at": "2026-06-12T14:30:00.000Z",
+  "messages": [
+    {
+      "id": "18bf1a2c3d4e5f60",
+      "threadId": "18bf1a2c3d4e5f60",
+      "labelIds": ["SENT", "CATEGORY_PERSONAL"],
+      "snippet": "Rachel, Really enjoyed the conversation today — appreciated the sharp questions on net retention and the meterin",
+      "internalDate": "1781044200000",
+      "sizeEstimate": 1820,
+      "payload": {
+        "mimeType": "text/plain",
+        "headers": [
+          { "name": "From",       "value": "Maya Chen <maya@pierside.io>" },
+          { "name": "To",         "value": "Rachel Goldman <rachel.goldman@northboundcap.com>" },
+          { "name": "Cc",         "value": "" },
+          { "name": "Subject",    "value": "Thanks for today — Pierside Series A" },
+          { "name": "Date",       "value": "Tue, 09 Jun 2026 22:30:00 +0000" },
+          { "name": "Message-ID", "value": "<CAB1aMa+a1b2c3d4e5@mail.pierside.io>" }
+        ],
+        "body": {
+          "size": 720,
+          "data": "Rachel,\n\nReally enjoyed the conversation today — appreciated the sharp questions on net retention and the metering-accuracy moat. As discussed, I'll send over the updated 90-day cohort breakdown and a re-cut of slide 14 (competitive moat) ahead of the partner meeting next Wednesday. I'll also coordinate two customer reference intros — thinking Verdant Foods and Northwind Pay; Sam is confirming both are available.\n\nStanding by on next steps from your team.\n\n— Maya\n\nMaya Chen | CEO, Pierside\n+1 (415) 555-0142\nmaya@pierside.io"
+        }
+      }
+    },
+    {
+      "id": "18bf1b3d4e5f6071",
+      "threadId": "18bf1a2c3d4e5f60",
+      "labelIds": ["INBOX", "UNREAD", "IMPORTANT", "CATEGORY_PERSONAL"],
+      "snippet": "Maya, Same here — the team came away energized after yesterday. To prep partners for next Wednesday (06-17 at",
+      "internalDate": "1781107200000",
+      "sizeEstimate": 2150,
+      "payload": {
+        "mimeType": "text/plain",
+        "headers": [
+          { "name": "From",        "value": "Rachel Goldman <rachel.goldman@northboundcap.com>" },
+          { "name": "To",          "value": "Maya Chen <maya@pierside.io>" },
+          { "name": "Cc",          "value": "" },
+          { "name": "Subject",     "value": "Re: Thanks for today — Pierside Series A" },
+          { "name": "Date",        "value": "Wed, 10 Jun 2026 16:00:00 +0000" },
+          { "name": "Message-ID",  "value": "<NBC.AAOiq2ZxR4t8K@mail.northboundcap.com>" },
+          { "name": "In-Reply-To", "value": "<CAB1aMa+a1b2c3d4e5@mail.pierside.io>" },
+          { "name": "References",  "value": "<CAB1aMa+a1b2c3d4e5@mail.pierside.io>" }
+        ],
+        "body": {
+          "size": 1080,
+          "data": "Maya,\n\nSame here — the team came away energized after yesterday. To prep partners for next Wednesday (06-17 at 11:00 AM PT), can you send the following by end of week?\n\n  1. 90-day cohort-level reconciliation accuracy %, broken down by customer tier (mid-market / SMB)\n  2. A re-cut of slide 14 — partners specifically asked for a sharper articulation of the metering-accuracy moat vs. Metronome / Orb\n  3. Warm intros to two customer references (your Verdant Foods + Northwind Pay suggestion is great — fine to start there)\n\nWill look out for materials by Friday. If there's any slip, give me a heads-up so I can manage partner expectations.\n\nTalk Wed,\nRachel\n\nRachel Goldman\nPartner, Northbound Capital\nrachel.goldman@northboundcap.com\n+1 (212) 555-0188"
+        }
+      }
+    },
+    {
+      "id": "18bf2c4e5f607182",
+      "threadId": "18bf2c4e5f607182",
+      "labelIds": ["INBOX", "UNREAD", "IMPORTANT", "CATEGORY_PERSONAL"],
+      "snippet": "Priya, two quick things ahead of our next sync. (1) v2 metering migration timeline — our June reporting close",
+      "internalDate": "1781112000000",
+      "sizeEstimate": 1980,
+      "payload": {
+        "mimeType": "text/plain",
+        "headers": [
+          { "name": "From",       "value": "Marcus Allen <marcus.allen@helixhealth.com>" },
+          { "name": "To",         "value": "Priya Raman <priya@pierside.io>" },
+          { "name": "Cc",         "value": "Maya Chen <maya@pierside.io>, Devin Park <devin@pierside.io>" },
+          { "name": "Subject",    "value": "Helix v2 metering timeline + odd dupes in last week's reconciliation" },
+          { "name": "Date",       "value": "Wed, 10 Jun 2026 17:20:00 +0000" },
+          { "name": "Message-ID", "value": "<HH.0610.Marcus.92ab@mail.helixhealth.com>" }
+        ],
+        "body": {
+          "size": 880,
+          "data": "Priya,\n\nTwo quick things ahead of our next sync.\n\n(1) v2 metering migration timeline — our June reporting close is 06-30 and I'd really like to be on v2 before then. Can you give me a firm date by Monday?\n\n(2) Our analytics team caught what looks like ~40 duplicate event_ids in last week's daily reconciliation report (mostly around the 2 AM batch window). We assumed it was on our end and started investigating, but wanted to flag in case it's something on the Pierside side. Happy to share the event_ids if useful.\n\nThanks,\nMarcus\n\nMarcus Allen | CTO, Helix Health\nmarcus.allen@helixhealth.com"
+        }
+      }
+    },
+    {
+      "id": "18bf2d5f607182a3",
+      "threadId": "18bf2c4e5f607182",
+      "labelIds": ["INBOX", "CATEGORY_PERSONAL"],
+      "snippet": "Marcus, taking both seriously. Timeline: we're targeting week of 06-22 for Helix on v2; there's a Stripe webho",
+      "internalDate": "1781121600000",
+      "sizeEstimate": 1620,
+      "payload": {
+        "mimeType": "text/plain",
+        "headers": [
+          { "name": "From",        "value": "Priya Raman <priya@pierside.io>" },
+          { "name": "To",          "value": "Marcus Allen <marcus.allen@helixhealth.com>" },
+          { "name": "Cc",          "value": "Maya Chen <maya@pierside.io>, Devin Park <devin@pierside.io>" },
+          { "name": "Subject",     "value": "Re: Helix v2 metering timeline + odd dupes in last week's reconciliation" },
+          { "name": "Date",        "value": "Wed, 10 Jun 2026 20:00:00 +0000" },
+          { "name": "Message-ID",  "value": "<PSI.0610.Priya.4f1b@mail.pierside.io>" },
+          { "name": "In-Reply-To", "value": "<HH.0610.Marcus.92ab@mail.helixhealth.com>" },
+          { "name": "References",  "value": "<HH.0610.Marcus.92ab@mail.helixhealth.com>" }
+        ],
+        "body": {
+          "size": 720,
+          "data": "Marcus,\n\nTaking both seriously.\n\n(1) Timeline: we're targeting the week of 06-22 for Helix on v2; there's a Stripe webhook setup item we're chasing (waiting on Stripe support — expected Mon 06-15). I'll confirm a firm date for you by EOD Monday.\n\n(2) Dupes: I'll get a written root-cause note to you by Friday. Quick note — you have not been over-billed; events appearing twice in the daily reconciliation view do not double-meter, but I'll confirm in writing.\n\nIf you can send the event_ids that would help us cross-check.\n\n— Priya"
+        }
+      }
+    },
+    {
+      "id": "18bf0e6071829304",
+      "threadId": "18bf0e6071829304",
+      "labelIds": ["INBOX", "IMPORTANT", "CATEGORY_PERSONAL"],
+      "snippet": "Hi Priya, our finance team flagged 47 duplicate event_ids in yesterday's daily reconciliation report. They're",
+      "internalDate": "1781043300000",
+      "sizeEstimate": 1480,
+      "payload": {
+        "mimeType": "text/plain",
+        "headers": [
+          { "name": "From",       "value": "Elena Vargas <elena.vargas@brightlinemobility.com>" },
+          { "name": "To",         "value": "Priya Raman <priya@pierside.io>" },
+          { "name": "Cc",         "value": "Maya Chen <maya@pierside.io>, Sam Ortiz <sam@pierside.io>" },
+          { "name": "Subject",    "value": "Duplicate metering events in Monday's reconciliation report?" },
+          { "name": "Date",       "value": "Tue, 09 Jun 2026 22:15:00 +0000" },
+          { "name": "Message-ID", "value": "<BLM.0609.Elena.7a3c@mail.brightlinemobility.com>" }
+        ],
+        "body": {
+          "size": 540,
+          "data": "Hi Priya,\n\nOur finance team flagged 47 duplicate event_ids in yesterday's daily reconciliation report. They're asking whether this means we've been over-billed. Can your team confirm and provide a written explanation by Friday so I can share it back with finance?\n\nSeparately — still waiting on the v2 migration timeline you mentioned at our last QBR.\n\nThanks,\nElena\n\nElena Vargas | VP Finance, Brightline Mobility\nelena.vargas@brightlinemobility.com"
+        }
+      }
+    },
+    {
+      "id": "18bf1f71829304b5",
+      "threadId": "18bf0e6071829304",
+      "labelIds": ["INBOX", "CATEGORY_PERSONAL"],
+      "snippet": "Hi Elena, taking this seriously. Quick assurance first — you have not been over-billed. The events appear twic",
+      "internalDate": "1781117100000",
+      "sizeEstimate": 1340,
+      "payload": {
+        "mimeType": "text/plain",
+        "headers": [
+          { "name": "From",        "value": "Priya Raman <priya@pierside.io>" },
+          { "name": "To",          "value": "Elena Vargas <elena.vargas@brightlinemobility.com>" },
+          { "name": "Cc",          "value": "Maya Chen <maya@pierside.io>, Sam Ortiz <sam@pierside.io>" },
+          { "name": "Subject",     "value": "Re: Duplicate metering events in Monday's reconciliation report?" },
+          { "name": "Date",        "value": "Wed, 10 Jun 2026 18:45:00 +0000" },
+          { "name": "Message-ID",  "value": "<PSI.0610.Priya.b9c2@mail.pierside.io>" },
+          { "name": "In-Reply-To", "value": "<BLM.0609.Elena.7a3c@mail.brightlinemobility.com>" },
+          { "name": "References",  "value": "<BLM.0609.Elena.7a3c@mail.brightlinemobility.com>" }
+        ],
+        "body": {
+          "size": 620,
+          "data": "Hi Elena,\n\nTaking this seriously. Quick assurance first — you have not been over-billed. The events appear twice in the daily reconciliation view but are charged once; I'll confirm this in a written root-cause note to you by EOD Friday (06-12).\n\nOn the v2 migration: targeting week of 06-22 pending a Stripe webhook setup item we're chasing. I'll confirm a firm date by Mon 06-15.\n\n— Priya"
+        }
+      }
+    },
+    {
+      "id": "18bf3082930405c6",
+      "threadId": "18bf3082930405c6",
+      "labelIds": ["INBOX", "CATEGORY_PERSONAL"],
+      "snippet": "Sam — small thing, our weekly review caught a handful of duplicate event_ids in the Wednesday reconciliation r",
+      "internalDate": "1781212500000",
+      "sizeEstimate": 1180,
+      "payload": {
+        "mimeType": "text/plain",
+        "headers": [
+          { "name": "From",       "value": "Dan Kowalski <dan.k@vestalogistics.com>" },
+          { "name": "To",         "value": "Sam Ortiz <sam@pierside.io>" },
+          { "name": "Cc",         "value": "Priya Raman <priya@pierside.io>, Maya Chen <maya@pierside.io>" },
+          { "name": "Subject",    "value": "Quick — odd dupes in daily report + Mon 06-15 call shift" },
+          { "name": "Date",       "value": "Thu, 11 Jun 2026 21:15:00 +0000" },
+          { "name": "Message-ID", "value": "<VL.0611.Dan.3e8f@mail.vestalogistics.com>" }
+        ],
+        "body": {
+          "size": 460,
+          "data": "Sam,\n\nTwo small things.\n\n1) Our weekly review caught a handful of duplicate event_ids in the Wed reconciliation report. Probably nothing, but flagging in case you're seeing it elsewhere.\n\n2) Our internal hardware migration just shifted timelines — can we move our Wed call to Mon 06-15 09:00 PT? Will give you v2 migration window thinking on the call.\n\nThanks,\nDan\n\nDan Kowalski | Sr Platform Eng, Vesta Logistics"
+        }
+      }
+    },
+    {
+      "id": "18bf419304a5c6d7",
+      "threadId": "18bf419304a5c6d7",
+      "labelIds": ["INBOX", "CATEGORY_PERSONAL"],
+      "snippet": "Hi Naomi — sorry to reach out direct, but we've been blocked on Stripe support ticket #cs-9924 (signing-secret",
+      "internalDate": "1781215200000",
+      "sizeEstimate": 1240,
+      "payload": {
+        "mimeType": "text/plain",
+        "headers": [
+          { "name": "From",       "value": "Devin Park <devin@pierside.io>" },
+          { "name": "To",         "value": "Naomi Patel <naomi.patel@stripe.com>" },
+          { "name": "Cc",         "value": "Alex Volkov <alex@pierside.io>, Maya Chen <maya@pierside.io>" },
+          { "name": "Subject",    "value": "Help unblock pierside staging webhook signing secret (#cs-9924)" },
+          { "name": "Date",       "value": "Thu, 11 Jun 2026 22:00:00 +0000" },
+          { "name": "Message-ID", "value": "<PSI.0611.Devin.aa11@mail.pierside.io>" }
+        ],
+        "body": {
+          "size": 540,
+          "data": "Hi Naomi,\n\nSorry to reach out direct. We've been blocked on Stripe support ticket #cs-9924 (signing-secret whitelist for pierside staging) since Mon 06-08 — Alex filed it and we haven't heard back. It's now blocking two customer rollouts (Helix Health and Brightline Mobility) on our v2 metering pipeline.\n\nAny chance you can nudge the right team? Happy to escalate via partnerships if that's a better path.\n\nThanks,\nDevin\n\nDevin Park | CTO, Pierside"
+        }
+      }
+    },
+    {
+      "id": "18bf52a4b5c6d7e8",
+      "threadId": "18bf419304a5c6d7",
+      "labelIds": ["INBOX", "CATEGORY_PERSONAL"],
+      "snippet": "Thanks for your message. I am out of office and will return Monday, June 15. For urgent customer escalations p",
+      "internalDate": "1781215230000",
+      "sizeEstimate": 720,
+      "payload": {
+        "mimeType": "text/plain",
+        "headers": [
+          { "name": "From",            "value": "Naomi Patel <naomi.patel@stripe.com>" },
+          { "name": "To",              "value": "Devin Park <devin@pierside.io>" },
+          { "name": "Cc",              "value": "" },
+          { "name": "Subject",         "value": "Auto-Reply: Re: Help unblock pierside staging webhook signing secret (#cs-9924)" },
+          { "name": "Date",            "value": "Thu, 11 Jun 2026 22:00:30 +0000" },
+          { "name": "Message-ID",      "value": "<STRIPE.AUTO.0611.naomi.f8a9@mail.stripe.com>" },
+          { "name": "In-Reply-To",     "value": "<PSI.0611.Devin.aa11@mail.pierside.io>" },
+          { "name": "References",      "value": "<PSI.0611.Devin.aa11@mail.pierside.io>" },
+          { "name": "Auto-Submitted",  "value": "auto-replied" },
+          { "name": "X-Autoreply",     "value": "yes" }
+        ],
+        "body": {
+          "size": 320,
+          "data": "Thanks for your message.\n\nI am out of office and will return Monday, June 15. I'll have very limited access to email until then.\n\nFor urgent customer escalations, please contact partnerships@stripe.com or your account team.\n\n— Naomi Patel\nSr Solutions Engineer, Stripe"
+        }
+      }
+    },
+    {
+      "id": "18bf63b5c6d7e8f9",
+      "threadId": "18bf63b5c6d7e8f9",
+      "labelIds": ["INBOX", "CATEGORY_PROMOTIONS"],
+      "snippet": "This week: how 5 Series A founders are rethinking GTM in 2026 + the surprising metric VCs are obsessing over",
+      "internalDate": "1781078400000",
+      "sizeEstimate": 8400,
+      "payload": {
+        "mimeType": "text/plain",
+        "headers": [
+          { "name": "From",       "value": "SaaStr Weekly <newsletter@saastr.com>" },
+          { "name": "To",         "value": "Maya Chen <maya@pierside.io>" },
+          { "name": "Cc",         "value": "" },
+          { "name": "Subject",    "value": "5 things every Series A founder learned this week" },
+          { "name": "Date",       "value": "Wed, 10 Jun 2026 08:00:00 +0000" },
+          { "name": "Message-ID", "value": "<saastr.weekly.20260610.qz1@newsletter.saastr.com>" },
+          { "name": "List-Unsubscribe", "value": "<mailto:unsub@saastr.com>" }
+        ],
+        "body": {
+          "size": 5200,
+          "data": "SaaStr Weekly | June 10, 2026\n\nThis week:\n  • How 5 Series A founders are rethinking GTM in 2026\n  • The surprising metric every VC is obsessing over right now\n  • PLG → SLG: when to switch\n  • Why net dollar retention is the new ARR\n  • 3 founder mistakes that kill round momentum\n\nRead the full issue online → saastr.com/weekly/2026-06-10\n\nYou're receiving this because you signed up for SaaStr Weekly. Unsubscribe anytime."
+        }
+      }
+    }
+  ]
+}
