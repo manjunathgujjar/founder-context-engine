@@ -1,0 +1,216 @@
+{
+  "workspace": "pierside",
+  "team_id": "T07PIERSDE",
+  "exported_at": "2026-06-12T14:30:00.000Z",
+  "users": [
+    { "id": "U07MAYACHN", "name": "maya",   "real_name": "Maya Chen",    "email": "maya@pierside.io",   "title": "CEO & Co-founder" },
+    { "id": "U07DEVINPK", "name": "devin",  "real_name": "Devin Park",   "email": "devin@pierside.io",  "title": "CTO & Co-founder" },
+    { "id": "U07JORDANW", "name": "jordan", "real_name": "Jordan Wei",   "email": "jordan@pierside.io", "title": "Lead Engineer" },
+    { "id": "U07ALEXVLK", "name": "alex",   "real_name": "Alex Volkov",  "email": "alex@pierside.io",   "title": "Backend Engineer" },
+    { "id": "U07PRIYARM", "name": "priya",  "real_name": "Priya Raman",  "email": "priya@pierside.io",  "title": "Head of Customer Success" },
+    { "id": "U07SAMORTZ", "name": "sam",    "real_name": "Sam Ortiz",    "email": "sam@pierside.io",    "title": "GTM Lead" }
+  ],
+  "channels": [
+    { "id": "C07FOUNDRS", "name": "founders",         "is_private": true,  "is_im": false, "topic": "Founders + leadership sync",         "members": ["U07MAYACHN", "U07DEVINPK", "U07PRIYARM"] },
+    { "id": "C07ENG",     "name": "eng",              "is_private": false, "is_im": false, "topic": "Engineering",                        "members": ["U07MAYACHN", "U07DEVINPK", "U07JORDANW", "U07ALEXVLK", "U07PRIYARM"] },
+    { "id": "C07CS",      "name": "customer-success", "is_private": false, "is_im": false, "topic": "Customer success cadence + alerts",  "members": ["U07PRIYARM", "U07SAMORTZ", "U07MAYACHN"] },
+    { "id": "D07SAMMAYA", "name": null,               "is_private": true,  "is_im": true,  "topic": null, "members": ["U07SAMORTZ", "U07MAYACHN"] },
+    { "id": "D07ALXDVN",  "name": null,               "is_private": true,  "is_im": true,  "topic": null, "members": ["U07ALEXVLK", "U07DEVINPK"] },
+    { "id": "D07DVNMAYA", "name": null,               "is_private": true,  "is_im": true,  "topic": null, "members": ["U07DEVINPK", "U07MAYACHN"] }
+  ],
+  "messages": [
+    {
+      "channel": "C07ENG", "ts": "1780910040.000100", "created_at": "2026-06-08T09:14:00.000Z",
+      "user": "U07ALEXVLK",
+      "text": "Filed Stripe support ticket #cs-9924 for the signing-secret whitelist on staging. They said 1-3 business days. ENG-142 blocked until that lands.",
+      "thread_ts": null, "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07CS", "ts": "1780938300.000100", "created_at": "2026-06-08T17:05:00.000Z",
+      "user": "U07PRIYARM",
+      "text": "Helix pulse done. Marcus wants firm v2 migration date by Mon 06-15. He mentioned ~40 duplicate event_ids in last week's daily reconciliation — assumed it was on their side; I said we'd confirm and circle back. Notes in ENG-155.",
+      "thread_ts": null, "reply_count": 0,
+      "reactions": [{ "name": "eyes", "users": ["U07SAMORTZ"], "count": 1 }]
+    },
+    {
+      "channel": "C07CS", "ts": "1781025000.000100", "created_at": "2026-06-09T17:30:00.000Z",
+      "user": "U07PRIYARM",
+      "text": "Brightline call done. Elena saw 47 dupes in Monday's reconciliation report. Finance is annoyed; she wants a written explanation by Fri 06-12. Renewal 2026-11-30 — flagging Brightline as at-risk. Notes in ENG-155.",
+      "thread_ts": null, "reply_count": 1,
+      "reactions": [{ "name": "warning", "users": ["U07SAMORTZ", "U07MAYACHN"], "count": 2 }]
+    },
+    {
+      "channel": "C07CS", "ts": "1781025600.000101", "created_at": "2026-06-09T17:40:00.000Z",
+      "user": "U07SAMORTZ",
+      "text": "Want me to loop in on the written explanation? I can frame it as 'we're investigating, will share root-cause by EOW' so Elena has something to hold on to.",
+      "thread_ts": "1781025000.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07FOUNDRS", "ts": "1781086500.000100", "created_at": "2026-06-10T10:15:00.000Z",
+      "user": "U07MAYACHN",
+      "text": "Quick update from Northbound pitch yesterday — Rachel Goldman was warm and asked the right questions. She emailed today with 3 follow-ups: (1) 90d cohort ARR breakdown by tier, (2) competitive-moat rewrite of slide 14, (3) intros to 2 customer references. I promised EOW. Partner mtg booked for Wed 06-17.",
+      "thread_ts": null, "reply_count": 2,
+      "reactions": [{ "name": "rocket", "users": ["U07DEVINPK", "U07PRIYARM"], "count": 2 }]
+    },
+    {
+      "channel": "C07FOUNDRS", "ts": "1781086920.000101", "created_at": "2026-06-10T10:22:00.000Z",
+      "user": "U07DEVINPK",
+      "text": "Nice. What do you need from us?",
+      "thread_ts": "1781086500.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07FOUNDRS", "ts": "1781087100.000102", "created_at": "2026-06-10T10:25:00.000Z",
+      "user": "U07MAYACHN",
+      "text": "Sam's owning the customer refs in ENG-157, I'll handle cohort + slide. Will share drafts in this channel before sending to Rachel.",
+      "thread_ts": "1781086500.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07ENG", "ts": "1781092080.000100", "created_at": "2026-06-10T11:48:00.000Z",
+      "user": "U07JORDANW",
+      "text": "Started ENG-149 latency work. Profiling shows ~140ms in tenant config lookup. Going to try Redis cache with 60s TTL + invalidation on settings update.",
+      "thread_ts": null, "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "D07ALXDVN", "ts": "1781101200.000100", "created_at": "2026-06-10T14:20:00.000Z",
+      "user": "U07ALEXVLK",
+      "text": "Stripe SE Naomi just auto-replied OOO until 6/15. Want me to escalate via partnerships now or wait?",
+      "thread_ts": null, "reply_count": 1, "reactions": []
+    },
+    {
+      "channel": "D07ALXDVN", "ts": "1781101800.000101", "created_at": "2026-06-10T14:30:00.000Z",
+      "user": "U07DEVINPK",
+      "text": "Wait — let me ping her direct first. If she doesn't reply by EOD tomorrow, partnerships.",
+      "thread_ts": "1781101200.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "D07SAMMAYA", "ts": "1781117700.000100", "created_at": "2026-06-10T18:55:00.000Z",
+      "user": "U07SAMORTZ",
+      "text": "Hey did Rachel get the cohort breakdown? She just messaged me asking if we're still on for Wed partner mtg.",
+      "thread_ts": null, "reply_count": 1, "reactions": []
+    },
+    {
+      "channel": "D07SAMMAYA", "ts": "1781118300.000101", "created_at": "2026-06-10T19:05:00.000Z",
+      "user": "U07MAYACHN",
+      "text": "Working on it tonight, will send by EOD Thu. Tell her yes for Wed.",
+      "thread_ts": "1781117700.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07CS", "ts": "1781120700.000100", "created_at": "2026-06-10T19:45:00.000Z",
+      "user": "U07PRIYARM",
+      "text": "Vesta pulse (Dan Kowalski) rescheduled to Mon 06-15 09:00 PT — his ask, internal hardware migration on their side. Heads-up: Dan is the engineer most likely to escalate the duplicate-event reports to Vesta finance if we don't get ahead of it.",
+      "thread_ts": null, "reply_count": 0,
+      "reactions": [{ "name": "eyes", "users": ["U07SAMORTZ"], "count": 1 }]
+    },
+    {
+      "channel": "C07CS", "ts": "1781172000.000100", "created_at": "2026-06-11T10:00:00.000Z",
+      "user": "U07SAMORTZ",
+      "text": "FYI — Rachel @ Northbound asked Maya for 2 customer refs (Series A DD). Thinking Verdant Foods + Northwind Pay (both v2, NPS 9 + 8, both confirmed willing in last QBR). Filed ENG-157. Confirm before I draft the warm-intro asks?",
+      "thread_ts": null, "reply_count": 2, "reactions": []
+    },
+    {
+      "channel": "C07CS", "ts": "1781172600.000101", "created_at": "2026-06-11T10:10:00.000Z",
+      "user": "U07MAYACHN",
+      "text": "Confirmed — those two. I'll send the warm intros once Sam pings them to give a heads-up.",
+      "thread_ts": "1781172000.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07CS", "ts": "1781173200.000102", "created_at": "2026-06-11T10:20:00.000Z",
+      "user": "U07PRIYARM",
+      "text": "+1, both are good ambassadors. Verdant's CFO especially likes talking accuracy lift.",
+      "thread_ts": "1781172000.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07ENG", "ts": "1781184120.000100", "created_at": "2026-06-11T13:22:00.000Z",
+      "user": "U07PRIYARM",
+      "text": "Anyone seen tickets for duplicate event_ids in the daily reconciliation reports? 3rd customer this week — Marcus (Helix), Elena (Brightline), Dan (Vesta). Want to make sure we have a triage issue open before this escalates.",
+      "thread_ts": null, "reply_count": 2,
+      "reactions": [{ "name": "eyes", "users": ["U07DEVINPK", "U07ALEXVLK"], "count": 2 }]
+    },
+    {
+      "channel": "C07ENG", "ts": "1781184720.000101", "created_at": "2026-06-11T13:32:00.000Z",
+      "user": "U07DEVINPK",
+      "text": "Closest is ENG-135 (schema validation hardening), but that doesn't directly track the customer reports. We probably want a separate triage issue — \"duplicate event_ids in daily reconciliation on high-volume tenants\". Alex?",
+      "thread_ts": "1781184120.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07ENG", "ts": "1781185020.000102", "created_at": "2026-06-11T13:37:00.000Z",
+      "user": "U07ALEXVLK",
+      "text": "I can file one tomorrow if no one beats me to it. Need 30 min to pull a few event_ids from the warehouse first so the issue has real evidence.",
+      "thread_ts": "1781184120.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07FOUNDRS", "ts": "1781188200.000100", "created_at": "2026-06-11T14:30:00.000Z",
+      "user": "U07MAYACHN",
+      "text": "v1 metering API deprecation — proposing we set sunset for 2026-09-30. Reasoning in pierside Notion `/decisions/2026-06-11-v1-sunset`. ~50% of support load last quarter came from v1 schema ambiguity (`event_id` typing, missing `tenant_id`). v2 GA since April. Need approvals from you both.",
+      "thread_ts": null, "reply_count": 3,
+      "reactions": [{ "name": "white_check_mark", "users": ["U07DEVINPK", "U07PRIYARM"], "count": 2 }]
+    },
+    {
+      "channel": "C07FOUNDRS", "ts": "1781190600.000101", "created_at": "2026-06-11T15:10:00.000Z",
+      "user": "U07DEVINPK",
+      "text": "Approved. We can ship migration guide this week (ENG-154 — Jordan's on it).",
+      "thread_ts": "1781188200.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07FOUNDRS", "ts": "1781192520.000102", "created_at": "2026-06-11T15:42:00.000Z",
+      "user": "U07PRIYARM",
+      "text": "Approved. I'll own customer comms — 18 tenants on v1, top 5 by ARR get white-glove migration support. Will file as ENG-153, due 06-19.",
+      "thread_ts": "1781188200.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07FOUNDRS", "ts": "1781193720.000103", "created_at": "2026-06-11T16:02:00.000Z",
+      "user": "U07MAYACHN",
+      "text": "Great — marking ENG-152 done. Priya owns ENG-153 for comms by 06-19. Customers should hear from us before this leaks via the migration guide PR.",
+      "thread_ts": "1781188200.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07CS", "ts": "1781253600.000100", "created_at": "2026-06-12T08:40:00.000Z",
+      "user": "U07PRIYARM",
+      "text": "I'm starting on ENG-153 (v1 deprecation comms) today. Will share drafts by EOD. Need top-5 ARR list from Sam for white-glove cohort.",
+      "thread_ts": null, "reply_count": 1, "reactions": []
+    },
+    {
+      "channel": "C07CS", "ts": "1781253900.000101", "created_at": "2026-06-12T08:45:00.000Z",
+      "user": "U07SAMORTZ",
+      "text": "Top 5 by ARR: Helix ($156k), Brightline ($84k), Vesta ($72k), Verdant Foods, Northwind Pay. Sending account-rep contacts in DM.",
+      "thread_ts": "1781253600.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07ENG", "ts": "1781254800.000100", "created_at": "2026-06-12T09:00:00.000Z",
+      "user": "U07ALEXVLK",
+      "text": "Heads up — Stripe SE Naomi OOO until 6/15 per auto-reply. ENG-142 still blocked. Devin's escalating via partnerships if no reply by EOD Mon.",
+      "thread_ts": null, "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07FOUNDRS", "ts": "1781255100.000100", "created_at": "2026-06-12T09:05:00.000Z",
+      "user": "U07DEVINPK",
+      "text": "Heads up — Stripe webhook blocker (ENG-142) is now 4 days old, blocks Helix (ENG-148) and Brightline (ENG-151) v2 rollouts. Stripe SE OOO until Mon 06-15. If no response by EOD Mon I'll escalate via partnerships. Worth flagging to Marcus/Elena proactively?",
+      "thread_ts": null, "reply_count": 1,
+      "reactions": [{ "name": "warning", "users": ["U07PRIYARM"], "count": 1 }]
+    },
+    {
+      "channel": "C07FOUNDRS", "ts": "1781255700.000101", "created_at": "2026-06-12T09:15:00.000Z",
+      "user": "U07PRIYARM",
+      "text": "Yes — let me draft a holding note for both. Will go out today after I get the v1 deprecation comms shape settled.",
+      "thread_ts": "1781255100.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "D07DVNMAYA", "ts": "1781256600.000100", "created_at": "2026-06-12T09:30:00.000Z",
+      "user": "U07DEVINPK",
+      "text": "Standup-via-Slack since you're in back-to-backs: ENG-142 still blocked (Stripe SE OOO til Mon), ENG-148 + 151 blocked downstream, ENG-149 (p95 latency) progressing — Jordan has a Redis cache up in staging. v1 deprecation comms (ENG-153) starts today. Nothing on fire that you need to act on this morning.",
+      "thread_ts": null, "reply_count": 1, "reactions": []
+    },
+    {
+      "channel": "D07DVNMAYA", "ts": "1781256900.000101", "created_at": "2026-06-12T09:35:00.000Z",
+      "user": "U07MAYACHN",
+      "text": "Thanks. Top of my list: get Rachel her cohort numbers + slide 14 rewrite (overdue from yesterday). Also nudge Sam on customer refs. Ping me if Stripe responds.",
+      "thread_ts": "1781256600.000100", "reply_count": 0, "reactions": []
+    },
+    {
+      "channel": "C07ENG", "ts": "1781257320.000100", "created_at": "2026-06-12T09:42:00.000Z",
+      "user": "U07MAYACHN",
+      "text": "Cycle 24 mid-week check: ENG-142 blocked is our biggest concern (customer impact via Helix + Brightline). ENG-150 (Northbound DD) is my own overdue. Let me know if I can unblock anything for you all.",
+      "thread_ts": null, "reply_count": 0, "reactions": []
+    }
+  ]
+}
