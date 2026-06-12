@@ -1,0 +1,267 @@
+{
+  "calendar_id": "maya@pierside.io",
+  "calendar_summary": "Maya Chen",
+  "time_zone": "America/Los_Angeles",
+  "exported_at": "2026-06-12T14:30:00.000Z",
+  "events": [
+    {
+      "kind": "calendar#event",
+      "id": "5kfp8q1k0aoi52rpmpvkvulqu1",
+      "iCalUID": "5kfp8q1k0aoi52rpmpvkvulqu1@google.com",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWtmcDhxMWswYW9pNTJycG1wdmt2dWxxdTE",
+      "summary": "Pulse — Helix Health (Marcus Allen)",
+      "description": "Weekly CS pulse with Helix.\n\nAgenda:\n  • v2 metering migration timeline\n  • Recent daily reconciliation reports — anything odd?\n  • Okta SSO post-launch check-in (ENG-145 shipped 06-04)\n\nMaya: optional — listening for migration timeline pushback.",
+      "location": "Google Meet",
+      "created": "2026-06-01T17:00:00.000Z",
+      "updated": "2026-06-08T18:50:00.000Z",
+      "creator":   { "email": "priya@pierside.io", "displayName": "Priya Raman" },
+      "organizer": { "email": "priya@pierside.io", "displayName": "Priya Raman" },
+      "start": { "dateTime": "2026-06-08T11:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "end":   { "dateTime": "2026-06-08T11:30:00-07:00", "timeZone": "America/Los_Angeles" },
+      "attendees": [
+        { "email": "priya@pierside.io",            "displayName": "Priya Raman",  "responseStatus": "accepted", "organizer": true },
+        { "email": "marcus.allen@helixhealth.com", "displayName": "Marcus Allen", "responseStatus": "accepted" },
+        { "email": "maya@pierside.io",             "displayName": "Maya Chen",    "responseStatus": "accepted", "optional": true, "self": true }
+      ],
+      "conferenceData": {
+        "conferenceId": "abc-defg-hij",
+        "conferenceSolution": { "name": "Google Meet", "iconUri": "https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v6/web-96dp/logo_meet_2020q4_color_2x_web_96dp.png" },
+        "entryPoints": [{ "entryPointType": "video", "uri": "https://meet.google.com/abc-defg-hij", "label": "meet.google.com/abc-defg-hij" }]
+      },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "id": "5kfp8q1k0aoi52rpmpvkvulqu2",
+      "iCalUID": "5kfp8q1k0aoi52rpmpvkvulqu2@google.com",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWtmcDhxMWswYW9pNTJycG1wdmt2dWxxdTI",
+      "summary": "Pulse — Brightline Mobility (Elena Vargas)",
+      "description": "Weekly CS pulse with Brightline.\n\nAgenda:\n  • Finance team concerns from last week's reconciliation report\n  • v2 migration timeline ask (Elena raised at last QBR)\n  • Renewal cadence — 2026-11-30\n\nMaya: optional — declining; Priya will brief in #customer-success.",
+      "location": "Google Meet",
+      "created": "2026-06-01T17:00:00.000Z",
+      "updated": "2026-06-09T17:32:00.000Z",
+      "creator":   { "email": "priya@pierside.io", "displayName": "Priya Raman" },
+      "organizer": { "email": "priya@pierside.io", "displayName": "Priya Raman" },
+      "start": { "dateTime": "2026-06-09T13:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "end":   { "dateTime": "2026-06-09T13:45:00-07:00", "timeZone": "America/Los_Angeles" },
+      "attendees": [
+        { "email": "priya@pierside.io",                       "displayName": "Priya Raman",  "responseStatus": "accepted", "organizer": true },
+        { "email": "elena.vargas@brightlinemobility.com",     "displayName": "Elena Vargas", "responseStatus": "accepted" },
+        { "email": "sam@pierside.io",                         "displayName": "Sam Ortiz",    "responseStatus": "accepted", "optional": true },
+        { "email": "maya@pierside.io",                        "displayName": "Maya Chen",    "responseStatus": "declined", "optional": true, "self": true }
+      ],
+      "conferenceData": {
+        "conferenceId": "klm-nopq-rst",
+        "conferenceSolution": { "name": "Google Meet" },
+        "entryPoints": [{ "entryPointType": "video", "uri": "https://meet.google.com/klm-nopq-rst" }]
+      },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "id": "5kfp8q1k0aoi52rpmpvkvulqu3",
+      "iCalUID": "5kfp8q1k0aoi52rpmpvkvulqu3@google.com",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWtmcDhxMWswYW9pNTJycG1wdmt2dWxxdTM",
+      "summary": "Pierside <> Northbound Capital — Series A pitch",
+      "description": "Series A pitch meeting with Rachel Goldman (Partner, Northbound Capital).\n\nAgenda:\n  • Product demo (10 min) — v2 metering pipeline\n  • GTM + cohort retention narrative\n  • Financials, runway, ask\n\nMaterials: slides linked in pitch deck (slide 14 = competitive moat).",
+      "location": "Zoom — link in description",
+      "created": "2026-05-28T15:00:00.000Z",
+      "updated": "2026-06-05T10:00:00.000Z",
+      "creator":   { "email": "rachel.goldman@northboundcap.com", "displayName": "Rachel Goldman" },
+      "organizer": { "email": "rachel.goldman@northboundcap.com", "displayName": "Rachel Goldman" },
+      "start": { "dateTime": "2026-06-09T14:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "end":   { "dateTime": "2026-06-09T15:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "attendees": [
+        { "email": "rachel.goldman@northboundcap.com", "displayName": "Rachel Goldman", "responseStatus": "accepted", "organizer": true },
+        { "email": "maya@pierside.io",                  "displayName": "Maya Chen",      "responseStatus": "accepted", "self": true }
+      ],
+      "conferenceData": {
+        "conferenceId": "northbound-pitch-0609",
+        "conferenceSolution": { "name": "Zoom Meeting" },
+        "entryPoints": [{ "entryPointType": "video", "uri": "https://northboundcap.zoom.us/j/8845599210", "label": "Zoom: 884 5599 2100" }]
+      },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "id": "5kfp8q1k0aoi52rpmpvkvulqu4",
+      "iCalUID": "5kfp8q1k0aoi52rpmpvkvulqu4@google.com",
+      "status": "cancelled",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWtmcDhxMWswYW9pNTJycG1wdmt2dWxxdTQ",
+      "summary": "Pulse — Vesta Logistics (Dan Kowalski) [CANCELLED — rescheduled to Mon 06-15 09:00 PT]",
+      "description": "Cancelled per Dan's request — internal hardware migration on Vesta side. Rescheduled to Mon 06-15 09:00 PT (new event in calendar).\n\nOriginal agenda:\n  • v2 migration window\n  • Recent reconciliation reports\n\nHeads-up: Dan is most likely Vesta contact to escalate the duplicate-event reports to their finance team.",
+      "location": "Google Meet",
+      "created": "2026-06-01T17:00:00.000Z",
+      "updated": "2026-06-10T19:40:00.000Z",
+      "creator":   { "email": "priya@pierside.io", "displayName": "Priya Raman" },
+      "organizer": { "email": "priya@pierside.io", "displayName": "Priya Raman" },
+      "start": { "dateTime": "2026-06-10T10:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "end":   { "dateTime": "2026-06-10T10:30:00-07:00", "timeZone": "America/Los_Angeles" },
+      "attendees": [
+        { "email": "priya@pierside.io",         "displayName": "Priya Raman",  "responseStatus": "accepted", "organizer": true },
+        { "email": "dan.k@vestalogistics.com",  "displayName": "Dan Kowalski", "responseStatus": "declined" },
+        { "email": "maya@pierside.io",          "displayName": "Maya Chen",    "responseStatus": "accepted", "optional": true, "self": true }
+      ],
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "id": "5kfp8q1k0aoi52rpmpvkvulqu5",
+      "iCalUID": "5kfp8q1k0aoi52rpmpvkvulqu5@google.com",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWtmcDhxMWswYW9pNTJycG1wdmt2dWxxdTU",
+      "summary": "Founders sync (weekly)",
+      "description": "Weekly founders sync.\n\nThis week's agenda:\n  • v1 metering API deprecation — sunset proposal (Maya)\n  • Customer pulse summary — Helix, Brightline, Vesta (Priya)\n  • Northbound DD update (Maya)\n  • Cycle 24 status — ENG-142 Stripe blocker (Devin)\n\nDecision out: v1 sunset 2026-09-30 approved by all 3. ENG-152 marked done; ENG-153 (comms) owned by Priya, due 06-19.",
+      "location": "Pierside HQ — Bridge Room",
+      "created": "2026-01-04T10:00:00.000Z",
+      "updated": "2026-06-11T16:05:00.000Z",
+      "recurringEventId": "founders-sync-weekly",
+      "originalStartTime": { "dateTime": "2026-06-11T14:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "creator":   { "email": "maya@pierside.io", "displayName": "Maya Chen" },
+      "organizer": { "email": "maya@pierside.io", "displayName": "Maya Chen", "self": true },
+      "start": { "dateTime": "2026-06-11T14:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "end":   { "dateTime": "2026-06-11T15:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "attendees": [
+        { "email": "maya@pierside.io",  "displayName": "Maya Chen",   "responseStatus": "accepted", "organizer": true, "self": true },
+        { "email": "devin@pierside.io", "displayName": "Devin Park",  "responseStatus": "accepted" },
+        { "email": "priya@pierside.io", "displayName": "Priya Raman", "responseStatus": "accepted" }
+      ],
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "id": "5kfp8q1k0aoi52rpmpvkvulqu6",
+      "iCalUID": "5kfp8q1k0aoi52rpmpvkvulqu6@google.com",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWtmcDhxMWswYW9pNTJycG1wdmt2dWxxdTY",
+      "summary": "Founders standup",
+      "description": "Daily founders standup (M-F). Quick check-in on top blockers.",
+      "location": "Slack huddle",
+      "created": "2026-01-04T10:00:00.000Z",
+      "updated": "2026-06-12T09:05:00.000Z",
+      "recurringEventId": "founders-standup-daily",
+      "originalStartTime": { "dateTime": "2026-06-12T09:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "creator":   { "email": "maya@pierside.io", "displayName": "Maya Chen" },
+      "organizer": { "email": "maya@pierside.io", "displayName": "Maya Chen", "self": true },
+      "start": { "dateTime": "2026-06-12T09:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "end":   { "dateTime": "2026-06-12T09:15:00-07:00", "timeZone": "America/Los_Angeles" },
+      "attendees": [
+        { "email": "maya@pierside.io",  "displayName": "Maya Chen",   "responseStatus": "accepted", "organizer": true, "self": true },
+        { "email": "devin@pierside.io", "displayName": "Devin Park",  "responseStatus": "accepted" },
+        { "email": "priya@pierside.io", "displayName": "Priya Raman", "responseStatus": "accepted" }
+      ],
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "id": "5kfp8q1k0aoi52rpmpvkvulqu7",
+      "iCalUID": "5kfp8q1k0aoi52rpmpvkvulqu7@google.com",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWtmcDhxMWswYW9pNTJycG1wdmt2dWxxdTc",
+      "summary": "Maya <> Devin 1:1",
+      "description": "Standing 1:1.\n\nThis week:\n  • Cycle 24 status / Stripe blocker (ENG-142)\n  • Northbound DD prep (ENG-150) — Maya needs to finalize cohort numbers + slide 14\n  • v1 deprecation rollout — coordinating comms with Priya\n  • Hiring updates",
+      "location": "Pierside HQ — Maya's office",
+      "created": "2026-01-04T10:00:00.000Z",
+      "updated": "2026-06-10T18:00:00.000Z",
+      "recurringEventId": "maya-devin-1on1-biweekly",
+      "originalStartTime": { "dateTime": "2026-06-12T13:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "creator":   { "email": "maya@pierside.io", "displayName": "Maya Chen" },
+      "organizer": { "email": "maya@pierside.io", "displayName": "Maya Chen", "self": true },
+      "start": { "dateTime": "2026-06-12T13:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "end":   { "dateTime": "2026-06-12T13:30:00-07:00", "timeZone": "America/Los_Angeles" },
+      "attendees": [
+        { "email": "maya@pierside.io",  "displayName": "Maya Chen",  "responseStatus": "accepted", "organizer": true, "self": true },
+        { "email": "devin@pierside.io", "displayName": "Devin Park", "responseStatus": "accepted" }
+      ],
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "id": "5kfp8q1k0aoi52rpmpvkvulqu8",
+      "iCalUID": "5kfp8q1k0aoi52rpmpvkvulqu8@google.com",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWtmcDhxMWswYW9pNTJycG1wdmt2dWxxdTg",
+      "summary": "Pulse — Vesta Logistics (Dan Kowalski) [rescheduled]",
+      "description": "Rescheduled from Wed 06-10 per Dan's request.\n\nAgenda:\n  • v2 migration window — Dan to share thinking based on their internal hardware migration\n  • Duplicate event_ids in daily reconciliation — Dan flagged in Slack + email; we should preview root-cause if Friday's note has landed\n  • v1 deprecation preview (do NOT formalize — formal comms in ENG-153 going out 06-19)\n\nNotes: Dan is the engineer most likely to escalate the duplicate-events issue to Vesta finance.",
+      "location": "Google Meet",
+      "created": "2026-06-10T19:42:00.000Z",
+      "updated": "2026-06-10T19:42:00.000Z",
+      "creator":   { "email": "priya@pierside.io", "displayName": "Priya Raman" },
+      "organizer": { "email": "priya@pierside.io", "displayName": "Priya Raman" },
+      "start": { "dateTime": "2026-06-15T09:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "end":   { "dateTime": "2026-06-15T09:30:00-07:00", "timeZone": "America/Los_Angeles" },
+      "attendees": [
+        { "email": "priya@pierside.io",         "displayName": "Priya Raman",  "responseStatus": "accepted", "organizer": true },
+        { "email": "dan.k@vestalogistics.com",  "displayName": "Dan Kowalski", "responseStatus": "accepted" },
+        { "email": "sam@pierside.io",           "displayName": "Sam Ortiz",    "responseStatus": "accepted", "optional": true },
+        { "email": "maya@pierside.io",          "displayName": "Maya Chen",    "responseStatus": "needsAction", "optional": true, "self": true }
+      ],
+      "conferenceData": {
+        "conferenceId": "vesta-pulse-0615",
+        "conferenceSolution": { "name": "Google Meet" },
+        "entryPoints": [{ "entryPointType": "video", "uri": "https://meet.google.com/uvw-xyza-bcd" }]
+      },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "id": "5kfp8q1k0aoi52rpmpvkvulqu9",
+      "iCalUID": "5kfp8q1k0aoi52rpmpvkvulqu9@google.com",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWtmcDhxMWswYW9pNTJycG1wdmt2dWxxdTk",
+      "summary": "Pierside <> Northbound Capital — Partners meeting",
+      "description": "Partner meeting following Tue 06-09 pitch.\n\nMaterials needed (per Rachel's 06-10 follow-up):\n  1. 90-day cohort-level reconciliation accuracy % by tier (mid-market / SMB)\n  2. Re-cut of slide 14 — competitive-moat articulation vs. Metronome / Orb\n  3. Warm intros to 2 customer references (Verdant Foods, Northwind Pay)\n\nPromised to Rachel by Fri 06-12 EOW.\n\nLinear: ENG-150 (memo + cohort), ENG-157 (customer refs).",
+      "location": "Northbound Capital HQ, NYC + Zoom",
+      "created": "2026-06-09T22:00:00.000Z",
+      "updated": "2026-06-10T16:05:00.000Z",
+      "creator":   { "email": "rachel.goldman@northboundcap.com", "displayName": "Rachel Goldman" },
+      "organizer": { "email": "rachel.goldman@northboundcap.com", "displayName": "Rachel Goldman" },
+      "start": { "dateTime": "2026-06-17T11:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "end":   { "dateTime": "2026-06-17T12:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "attendees": [
+        { "email": "rachel.goldman@northboundcap.com", "displayName": "Rachel Goldman",      "responseStatus": "accepted", "organizer": true },
+        { "email": "marcus.lin@northboundcap.com",     "displayName": "Marcus Lin (Partner)", "responseStatus": "accepted" },
+        { "email": "jenny.wong@northboundcap.com",     "displayName": "Jenny Wong (Partner)", "responseStatus": "accepted" },
+        { "email": "maya@pierside.io",                  "displayName": "Maya Chen",            "responseStatus": "accepted", "self": true }
+      ],
+      "conferenceData": {
+        "conferenceId": "northbound-partners-0617",
+        "conferenceSolution": { "name": "Zoom Meeting" },
+        "entryPoints": [{ "entryPointType": "video", "uri": "https://northboundcap.zoom.us/j/9988776655", "label": "Zoom: 998 877 6655" }]
+      },
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "id": "5kfp8q1k0aoi52rpmpvkvulqua",
+      "iCalUID": "5kfp8q1k0aoi52rpmpvkvulqua@google.com",
+      "status": "tentative",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NWtmcDhxMWswYW9pNTJycG1wdmt2dWxxdWE",
+      "summary": "Helix Health — v2 metering migration kickoff (tentative)",
+      "description": "Tentative — pending ENG-142 unblock (Stripe webhook signing-secret whitelist).\n\nAgenda:\n  • Migration window: target week of 06-22\n  • Pre-cutover checklist walkthrough (idempotency, event_id format, signature header)\n  • Customer-side validation plan\n\nFalls through if ENG-142 still blocked by Mon 06-15 EOD; Priya will reschedule and send holding note to Marcus.",
+      "location": "Google Meet",
+      "created": "2026-06-10T11:25:00.000Z",
+      "updated": "2026-06-10T11:25:00.000Z",
+      "creator":   { "email": "priya@pierside.io", "displayName": "Priya Raman" },
+      "organizer": { "email": "priya@pierside.io", "displayName": "Priya Raman" },
+      "start": { "dateTime": "2026-06-18T14:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "end":   { "dateTime": "2026-06-18T15:00:00-07:00", "timeZone": "America/Los_Angeles" },
+      "attendees": [
+        { "email": "priya@pierside.io",            "displayName": "Priya Raman",  "responseStatus": "accepted", "organizer": true },
+        { "email": "devin@pierside.io",            "displayName": "Devin Park",   "responseStatus": "tentative" },
+        { "email": "jordan@pierside.io",           "displayName": "Jordan Wei",   "responseStatus": "tentative" },
+        { "email": "marcus.allen@helixhealth.com", "displayName": "Marcus Allen", "responseStatus": "tentative" },
+        { "email": "maya@pierside.io",             "displayName": "Maya Chen",    "responseStatus": "tentative", "self": true }
+      ],
+      "conferenceData": {
+        "conferenceId": "helix-v2-kickoff-0618",
+        "conferenceSolution": { "name": "Google Meet" },
+        "entryPoints": [{ "entryPointType": "video", "uri": "https://meet.google.com/hij-klmn-opq" }]
+      },
+      "eventType": "default"
+    }
+  ]
+}
