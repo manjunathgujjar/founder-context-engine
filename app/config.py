@@ -30,5 +30,9 @@ class Settings(BaseSettings):
 
     retrieval_top_k: int = Field(default=8, alias="RETRIEVAL_TOP_K")
 
+    # Pin TODAY to a fixed ISO date (e.g. "2026-06-12") for deterministic demo
+    # answers. Leave unset to use real current date at request time.
+    pinned_today: str | None = Field(default=None, alias="PINNED_TODAY")
+
 
 settings = Settings()
