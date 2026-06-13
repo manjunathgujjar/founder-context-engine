@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "description": "Golden Q/A pairs for the Pierside Founder AI Assistant eval harness.",
+    "scoring": {
+      "refusal_expected": "answer must be a refusal — either pre-LLM (refused=True) or LLM-emitted phrasing (e.g. 'I don't see that in the stored context').",
+      "must_cite": "every listed citation ID must appear in result.citations (verified).",
+      "must_cite_any_of": "at least one of the listed IDs must appear in result.citations.",
+      "must_mention": "every listed substring (case-insensitive) must appear in answer."
+    },
+    "fixture_pin_today": "2026-06-12"
+  },
+  "items": [
+    {
+      "id": "rachel_ask",
+      "question": "What did Rachel ask me for?",
+      "must_cite": ["gmail:18bf1b3d4e5f6071"],
+      "must_mention": ["cohort", "slide 14", "customer reference"],
+      "refusal_expected": false
+    },
+    {
+      "id": "blocked_tasks",
+      "question": "Which tasks are blocked and why?",
+      "must_cite": ["linear:ENG-142"],
+      "must_mention": ["ENG-142", "Stripe"],
+      "refusal_expected": false
+    },
+    {
+      "id": "customer_issues",
+      "question": "What customer issues keep coming up?",
+      "must_cite_any_of": [
+        "slack:C07ENG/1781184120.000100",
+        "slack:C07ENG/1781184720.000101",
+        "slack:C07ENG/1781185020.000102",
+        "slack:C07CS/1781120700.000100",
+        "slack:C07FOUNDRS/1781255100.000100",
+        "linear:ENG-135",
+        "linear:ENG-155",
+        "gmail:18bf2c4e5f607182",
+        "gmail:18bf0e6071829304",
+        "gmail:18bf3082930405c6"
+      ],
+      "must_mention": ["duplicate"],
+      "refusal_expected": false
+    },
+    {
+      "id": "decisions_this_week",
+      "question": "What decisions were made this week?",
+      "must_cite": ["linear:ENG-152"],
+      "must_mention": ["v1", "deprecat"],
+      "refusal_expected": false
+    },
+    {
+      "id": "wifi_password_refusal",
+      "question": "What is the wifi password at the office?",
+      "refusal_expected": true
+    }
+  ]
+}

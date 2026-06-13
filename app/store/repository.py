@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import sqlite3
 from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 import numpy as np
@@ -186,6 +187,107 @@ def list_sources(conn: sqlite3.Connection) -> list[dict]:
         "SELECT source, COUNT(*) AS n FROM documents GROUP BY source ORDER BY source"
     ).fetchall()
     return [{"source": r["source"], "documents": int(r["n"])} for r in rows]
+
+
+# --- answer cache + request log + stats -------------------------------------
+
+
+def cache_get(conn: sqlite3.Connection, question_hash: str, *, ttl: timedelta) -> str | None:
+    """Return serialized AnswerResult JSON if within TTL, else None (and evict)."""
+    row = conn.execute(
+        "SELECT answer_json, created_at FROM answer_cache WHERE question_hash = ?",
+        (question_hash,),
+    ).fetchone()
+    if not row:
+        return None
+    created = datetime.fromisoformat(row["created_at"])
+    if datetime.now(timezone.utc) - created > ttl:
+        conn.execute("DELETE FROM answer_cache WHERE question_hash = ?", (question_hash,))
+        return None
+    return row["answer_json"]
+
+
+def cache_put(conn: sqlite3.Connection, question_hash: str, question: str, answer_json: str) -> None:
+    conn.execute(
+        """
+        INSERT INTO answer_cache (question_hash, question, answer_json, created_at)
+        VALUES (?, ?, ?, ?)
+        ON CONFLICT(question_hash) DO UPDATE SET
+            answer_json = excluded.answer_json,
+            created_at  = excluded.created_at
+        """,
+        (question_hash, question, answer_json, datetime.now(timezone.utc).isoformat()),
+    )
+
+
+def log_request(
+    conn: sqlite3.Connection,
+    question: str,
+    *,
+    cache_hit: bool,
+    refused: bool,
+    top_fused_score: float | None,
+    cost: float,
+    prompt_tokens: int,
+    completion_tokens: int,
+    retrieve_seconds: float,
+    llm_seconds: float,
+    total_seconds: float,
+) -> None:
+    conn.execute(
+        """
+        INSERT INTO request_log
+            (ts, question, cache_hit, refused, top_fused_score, cost,
+             prompt_tokens, completion_tokens, retrieve_seconds, llm_seconds, total_seconds)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (
+            datetime.now(timezone.utc).isoformat(),
+            question,
+            int(cache_hit),
+            int(refused),
+            top_fused_score,
+            cost,
+            prompt_tokens,
+            completion_tokens,
+            retrieve_seconds,
+            llm_seconds,
+            total_seconds,
+        ),
+    )
+
+
+def get_stats(conn: sqlite3.Connection) -> dict:
+    """Aggregate metrics for /api/stats."""
+    row = conn.execute(
+        """
+        SELECT
+            COUNT(*)                                                       AS total_queries,
+            COALESCE(SUM(cache_hit), 0)                                    AS cache_hits,
+            COALESCE(SUM(refused), 0)                                      AS refusals,
+            COALESCE(SUM(cost), 0)                                         AS total_cost,
+            COALESCE(AVG(total_seconds), 0)                                AS avg_total_seconds,
+            COALESCE(AVG(CASE WHEN cache_hit = 0 THEN llm_seconds END), 0) AS avg_llm_seconds_uncached,
+            COALESCE(AVG(retrieve_seconds), 0)                             AS avg_retrieve_seconds,
+            COALESCE(SUM(prompt_tokens), 0)                                AS total_prompt_tokens,
+            COALESCE(SUM(completion_tokens), 0)                            AS total_completion_tokens
+        FROM request_log
+        """
+    ).fetchone()
+    total = int(row["total_queries"] or 0)
+    hits = int(row["cache_hits"] or 0)
+    return {
+        "total_queries":             total,
+        "cache_hits":                hits,
+        "cache_hit_rate":            (hits / total) if total else 0.0,
+        "refusals":                  int(row["refusals"] or 0),
+        "total_cost":                round(float(row["total_cost"] or 0.0), 6),
+        "avg_total_seconds":         round(float(row["avg_total_seconds"] or 0.0), 3),
+        "avg_llm_seconds_uncached":  round(float(row["avg_llm_seconds_uncached"] or 0.0), 3),
+        "avg_retrieve_seconds":      round(float(row["avg_retrieve_seconds"] or 0.0), 4),
+        "total_prompt_tokens":       int(row["total_prompt_tokens"] or 0),
+        "total_completion_tokens":   int(row["total_completion_tokens"] or 0),
+    }
 
 
 _FTS_BAD = set('"():*^+-')

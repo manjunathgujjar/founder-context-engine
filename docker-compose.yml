@@ -1,0 +1,23 @@
+# docker-compose.yml — local one-command run
+# Usage:
+#   docker compose up --build
+# Boots the FastAPI app at http://localhost:8000 with a persistent app.db
+# in the `pierside_data` named volume.
+
+services:
+  pierside:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pierside:latest
+    container_name: pierside
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - pierside_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  pierside_data:

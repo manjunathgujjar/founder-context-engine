@@ -4,7 +4,10 @@ POST /api/ask
     { "question": "...", "top_k": 8 }
 returns
     { answer, citations[], unverified_citations[], context[], today_iso,
-      model, usage, timings }
+      model, usage, timings, refused, cached }
+
+Async so the LLM call (off-loaded to a thread executor in the pipeline)
+doesn't block the event loop.
 """
 
 from __future__ import annotations
@@ -48,12 +51,14 @@ class AskResponse(BaseModel):
     model: str
     usage: dict
     timings: dict
+    refused: bool = False
+    cached: bool = False
 
 
 @router.post("/ask", response_model=AskResponse)
-def ask(req: AskRequest) -> AskResponse:
+async def ask(req: AskRequest) -> AskResponse:
     try:
-        result = pipeline.answer(req.question, top_k=req.top_k)
+        result = await pipeline.answer(req.question, top_k=req.top_k)
     except LLMError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
 
@@ -67,4 +72,6 @@ def ask(req: AskRequest) -> AskResponse:
         model=result.model,
         usage=result.usage,
         timings=result.timings,
+        refused=result.refused,
+        cached=result.cached,
     )

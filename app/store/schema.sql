@@ -53,3 +53,29 @@ CREATE TRIGGER IF NOT EXISTS documents_au AFTER UPDATE ON documents BEGIN
     INSERT INTO documents_fts(documents_fts, rowid, title, body) VALUES ('delete', old.rowid, old.title, old.body);
     INSERT INTO documents_fts(rowid, title, body) VALUES (new.rowid, new.title, new.body);
 END;
+
+-- Answer cache: sha256(normalized question) -> serialized AnswerResult JSON, 1hr TTL.
+CREATE TABLE IF NOT EXISTS answer_cache (
+    question_hash TEXT PRIMARY KEY,
+    question      TEXT NOT NULL,
+    answer_json   TEXT NOT NULL,
+    created_at    TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_answer_cache_created_at ON answer_cache(created_at);
+
+-- Request log: one row per /api/ask call (hit or miss). Drives /api/stats.
+CREATE TABLE IF NOT EXISTS request_log (
+    id                INTEGER PRIMARY KEY AUTOINCREMENT,
+    ts                TEXT NOT NULL,
+    question          TEXT NOT NULL,
+    cache_hit         INTEGER NOT NULL,
+    refused           INTEGER NOT NULL,
+    top_fused_score   REAL,
+    cost              REAL,
+    prompt_tokens     INTEGER,
+    completion_tokens INTEGER,
+    retrieve_seconds  REAL,
+    llm_seconds       REAL,
+    total_seconds     REAL
+);
+CREATE INDEX IF NOT EXISTS idx_request_log_ts ON request_log(ts);
