@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pierside · Founder Assistant</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@11/marked.min.js"></script>
+
+  <style>
+    :root {
+      --bg-base:#0a0a0a; --bg-card:#161616; --bg-hover:#1f1f1f;
+      --border-subtle:#1f1f1f; --border-card:#262626;
+      --text-primary:#ededed; --text-secondary:#999; --text-tertiary:#666;
+      --accent:#fbbf24;
+    }
+    html, body { background:var(--bg-base); color:var(--text-primary); font-family:'Inter',-apple-system,sans-serif; }
+
+    .src-gmail  { color:#e8615e; background:#2a1717; }
+    .src-gcal   { color:#5e8de8; background:#18202d; }
+    .src-linear { color:#a78bfa; background:#221c2d; }
+    .src-slack  { color:#79c08c; background:#182218; }
+
+    .badge-verified   { color:#10b981; background:#052e1c; }
+    .badge-unverified { color:#f87171; background:#2e0808; }
+
+    @keyframes shimmer { 0% { background-position:-200% 0; } 100% { background-position:200% 0; } }
+    .shimmer {
+      background: linear-gradient(90deg,#161616 0%,#1f1f1f 50%,#161616 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s linear infinite;
+      border-radius: 4px;
+    }
+
+    .citation-chip {
+      display:inline-block; padding:1px 6px; margin:0 1px;
+      background:#1f1f1f; border:1px solid #262626; border-radius:4px;
+      font-size:12px; color:var(--accent); text-decoration:none;
+      font-family:ui-monospace,monospace; transition: background .15s;
+    }
+    .citation-chip:hover { background:#2a2a2a; }
+    .citation-chip-unverified { color:#f87171; border-color:#2e0808; }
+
+    .markdown { font-size:15px; line-height:1.65; color:var(--text-primary); }
+    .markdown p { margin-bottom:12px; }
+    .markdown ol, .markdown ul { padding-left:24px; margin-bottom:12px; }
+    .markdown li { margin-bottom:4px; }
+    .markdown strong { color:var(--text-primary); font-weight:600; }
+    .markdown code { font-family:ui-monospace,monospace; background:#1f1f1f; padding:1px 4px; border-radius:3px; font-size:13px; }
+    .markdown a { color:var(--accent); }
+
+    .quick-ask { transition: all .15s; border-left: 2px solid transparent; }
+    .quick-ask:hover { background:var(--bg-hover); border-left-color:var(--accent); }
+
+    .citation-card { transition: all .15s; border-left: 3px solid transparent; }
+    .citation-card.highlighted { border-left-color:var(--accent); background:#1a1810; }
+
+    .focus-amber:focus { outline:2px solid var(--accent); outline-offset:2px; }
+
+    .clamp-2 {
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    }
+
+    ::-webkit-scrollbar { width:8px; height:8px; }
+    ::-webkit-scrollbar-track { background:var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background:#262626; border-radius:4px; }
+    ::-webkit-scrollbar-thumb:hover { background:#333; }
+
+    @media (max-width: 1024px) {
+      #app { flex-direction:column; height:auto; }
+      aside { width:100% !important; border:none !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen overflow-hidden">
+
+  <div class="h-screen flex" id="app">
+
+    <aside class="w-[280px] shrink-0 flex flex-col border-r border-[color:var(--border-subtle)] overflow-y-auto">
+      <div class="px-5 py-6">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded bg-amber-400/10 border border-amber-400/30 flex items-center justify-center">
+            <span class="text-amber-400 text-lg leading-none">◇</span>
+          </div>
+          <div>
+            <div class="text-[14px] font-semibold tracking-[0.02em] uppercase">Pierside</div>
+            <div class="text-[11px] text-[color:var(--text-tertiary)]">founder assistant</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-5 pb-2">
+        <div class="text-[11px] font-medium tracking-[0.08em] uppercase text-[color:var(--text-tertiary)] mb-2">Quick Asks</div>
+        <div class="space-y-1.5" id="quick-asks"></div>
+      </div>
+
+      <div class="mt-auto px-5 py-4 border-t border-[color:var(--border-subtle)] text-[11px] text-[color:var(--text-tertiary)] tabular-nums">
+        <div class="font-medium text-[color:var(--text-secondary)]">TODAY <span id="today-display">—</span></div>
+        <div class="mt-1" id="today-note"></div>
+      </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col overflow-y-auto">
+      <div class="max-w-[720px] w-full mx-auto px-6 py-8 flex-1">
+
+        <div class="mb-2 text-[11px] font-medium tracking-[0.08em] uppercase text-[color:var(--text-tertiary)]">Ask anything about your work</div>
+
+        <form id="ask-form" class="mb-6">
+          <textarea
+            id="question"
+            placeholder="What should I focus on today?"
+            rows="2"
+            class="w-full bg-[color:var(--bg-card)] border border-[color:var(--border-card)] rounded-lg px-4 py-3 text-[18px] text-[color:var(--text-primary)] placeholder:text-[color:var(--text-tertiary)] focus-amber resize-none"
+          ></textarea>
+          <div class="flex justify-end mt-2 gap-3 items-center">
+            <span class="text-[11px] text-[color:var(--text-tertiary)]">⏎ ask · ⇧⏎ newline</span>
+            <button id="submit-btn" type="submit" class="px-4 py-1.5 rounded-md text-[13px] font-medium text-[#0a0a0a] bg-amber-400 hover:bg-amber-300 disabled:opacity-50 disabled:cursor-not-allowed">
+              <span id="submit-label">ask ▸</span>
+            </button>
+          </div>
+        </form>
+
+        <div id="unverified-banner" class="hidden mb-4 p-3 rounded-lg" style="background:#2e0808;border:1px solid #4a1414;">
+          <div class="flex items-start gap-2">
+            <span class="text-red-400 mt-0.5">●</span>
+            <div class="text-[13px]">
+              <div class="font-medium text-red-200">Unverified citation in answer</div>
+              <div class="text-red-300/80 mt-0.5" id="unverified-text"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="answer-area"></div>
+
+        <div id="meta" class="hidden mt-6 p-3 rounded-lg bg-[color:var(--bg-card)] border border-[color:var(--border-card)] text-[11px] text-[color:var(--text-tertiary)] tabular-nums leading-relaxed"></div>
+      </div>
+    </main>
+
+    <aside class="w-[360px] shrink-0 flex flex-col border-l border-[color:var(--border-subtle)] overflow-y-auto">
+      <div class="px-5 py-6 sticky top-0 bg-[color:var(--bg-base)] z-10">
+        <div class="text-[11px] font-medium tracking-[0.08em] uppercase text-[color:var(--text-tertiary)]">
+          <span>Citations</span><span id="citations-summary" class="text-[color:var(--text-secondary)] normal-case font-normal"></span>
+        </div>
+      </div>
+      <div class="px-5 pb-6 space-y-2" id="citations-list"></div>
+    </aside>
+
+  </div>
+
+  <template id="tmpl-quick-ask">
+    <button class="quick-ask w-full text-left bg-[color:var(--bg-card)] border border-[color:var(--border-card)] rounded-md p-3">
+      <div class="flex items-baseline gap-2">
+        <span class="text-base leading-none js-icon"></span>
+        <span class="text-[13px] font-medium tracking-[0.05em] uppercase js-title"></span>
+      </div>
+      <div class="text-[12px] text-[color:var(--text-secondary)] mt-1 js-desc"></div>
+    </button>
+  </template>
+
+  <template id="tmpl-citation">
+    <div class="citation-card bg-[color:var(--bg-card)] border border-[color:var(--border-card)] rounded-md p-3">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="js-source-pill w-[22px] h-[22px] rounded text-[12px] font-semibold flex items-center justify-center"></span>
+        <span class="text-[10px] tracking-[0.06em] uppercase text-[color:var(--text-tertiary)] js-source"></span>
+        <span class="ml-auto js-badge text-[10px] tracking-[0.06em] uppercase px-2 py-0.5 rounded"></span>
+      </div>
+      <div class="text-[13px] font-medium leading-snug js-title clamp-2 mb-1"></div>
+      <div class="text-[11px] text-[color:var(--text-tertiary)] tabular-nums mb-2 js-meta"></div>
+      <div class="text-[12px] text-[color:var(--text-secondary)] clamp-2 js-snippet"></div>
+      <button class="js-expand text-[11px] text-[color:var(--text-tertiary)] hover:text-amber-400 mt-2">▾ expand</button>
+      <pre class="js-full hidden mt-2 text-[11px] font-mono text-[color:var(--text-secondary)] whitespace-pre-wrap leading-relaxed border-t border-[color:var(--border-card)] pt-2"></pre>
+    </div>
+  </template>
+
+  <template id="tmpl-skeleton-answer">
+    <div class="p-4 rounded-lg bg-[color:var(--bg-card)] border border-[color:var(--border-card)]">
+      <div class="shimmer h-4 mb-3 w-[80%]"></div>
+      <div class="shimmer h-4 mb-3 w-[95%]"></div>
+      <div class="shimmer h-4 mb-3 w-[70%]"></div>
+      <div class="shimmer h-4 mb-3 w-[88%]"></div>
+      <div class="shimmer h-4 w-[60%]"></div>
+    </div>
+  </template>
+
+  <template id="tmpl-skeleton-citation">
+    <div class="p-3 rounded-md bg-[color:var(--bg-card)] border border-[color:var(--border-card)]">
+      <div class="shimmer h-3 mb-2 w-[40%]"></div>
+      <div class="shimmer h-4 mb-2 w-[85%]"></div>
+      <div class="shimmer h-3 w-[70%]"></div>
+    </div>
+  </template>
+
+  <script>
+    const QUICK_ASKS = [
+      { icon:'⚡', title:'Focus today',       desc:'Cross-source priorities',     q:'What should I focus on today?' },
+      { icon:'🗓', title:'Next meeting prep', desc:'Calendar-aware brief',        q:'What should I know before my Wednesday investor meeting?' },
+      { icon:'💸', title:'Investor activity', desc:'Series A week-in-review',     q:'Summarize investor-related activity this week.' },
+      { icon:'⛔', title:'Blocked tasks',     desc:'Eng + customer reach',        q:'Which tasks are blocked and why?' },
+      { icon:'📣', title:'Customer issues',   desc:'Cross-source signal',         q:'What customer issues keep coming up?' },
+    ];
+
+    const $ = sel => document.querySelector(sel);
+    const tmpl = id => $('#'+id).content.firstElementChild.cloneNode(true);
+    const cssEscape = s => s.replace(/[^a-zA-Z0-9_-]/g, '_');
+    const escapeHtml = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    const quickAsksRoot = $('#quick-asks');
+    QUICK_ASKS.forEach(qa => {
+      const el = tmpl('tmpl-quick-ask');
+      el.querySelector('.js-icon').textContent = qa.icon;
+      el.querySelector('.js-title').textContent = qa.title;
+      el.querySelector('.js-desc').textContent = qa.desc;
+      el.addEventListener('click', () => submitQuestion(qa.q));
+      quickAsksRoot.appendChild(el);
+    });
+
+    const form = $('#ask-form');
+    const textarea = $('#question');
+    const submitBtn = $('#submit-btn');
+    const submitLabel = $('#submit-label');
+    const answerArea = $('#answer-area');
+    const citationsList = $('#citations-list');
+    const citationsSummary = $('#citations-summary');
+    const metaStrip = $('#meta');
+    const banner = $('#unverified-banner');
+    const bannerText = $('#unverified-text');
+
+    function renderEmptyState() {
+      answerArea.innerHTML = '';
+      citationsList.innerHTML = '';
+      citationsSummary.textContent = '';
+      metaStrip.classList.add('hidden');
+      banner.classList.add('hidden');
+      const hint = document.createElement('div');
+      hint.className = 'text-[12px] text-[color:var(--text-secondary)] leading-relaxed mt-1';
+      hint.innerHTML = `<div class="text-[color:var(--text-tertiary)] mb-2">▾ no question yet</div>
+        Citations from the assistant's answer will appear here. Each one verifies a specific claim against the stored context.<br><br>
+        <span style="color:#10b981">●</span> verified · <span style="color:#f87171">●</span> unverified (model invented an ID).`;
+      citationsList.appendChild(hint);
+    }
+
+    function renderSkeleton() {
+      answerArea.innerHTML = '';
+      answerArea.appendChild(tmpl('tmpl-skeleton-answer'));
+      citationsList.innerHTML = '';
+      for (let i = 0; i < 3; i++) citationsList.appendChild(tmpl('tmpl-skeleton-citation'));
+      citationsSummary.textContent = ' · thinking…';
+      metaStrip.classList.add('hidden');
+      banner.classList.add('hidden');
+    }
+
+    function renderAnswerHtml(text, verifiedSet) {
+      const html = marked.parse(text || '');
+      return html.replace(/\[((?:gmail|gcal|linear|slack):[A-Za-z0-9._\/+\-]+)\]/g, (_, id) => {
+        const cls = 'citation-chip' + (verifiedSet.has(id) ? '' : ' citation-chip-unverified');
+        return `<a href="#cite-${cssEscape(id)}" data-cite="${escapeHtml(id)}" class="${cls}">${escapeHtml(id)}</a>`;
+      });
+    }
+
+    function renderCitationCard(c, verifiedSet, unverifiedSet) {
+      const el = tmpl('tmpl-citation');
+      el.id = 'cite-' + cssEscape(c.document_id);
+      const pill = el.querySelector('.js-source-pill');
+      pill.textContent = c.source[0].toUpperCase();
+      pill.classList.add('src-' + c.source);
+      el.querySelector('.js-source').textContent = c.source;
+      const badge = el.querySelector('.js-badge');
+      if (verifiedSet.has(c.document_id))       { badge.textContent = '● verified';   badge.classList.add('badge-verified'); }
+      else if (unverifiedSet.has(c.document_id)){ badge.textContent = '● unverified'; badge.classList.add('badge-unverified'); }
+      else                                       { badge.textContent = '○ retrieved'; badge.classList.add('text-[color:var(--text-tertiary)]'); }
+      el.querySelector('.js-title').textContent = c.title || '(untitled)';
+      const created = (c.created_at || '').slice(0, 16).replace('T', ' ');
+      el.querySelector('.js-meta').textContent = `${c.type} · ${created}`;
+      el.querySelector('.js-snippet').textContent = c.snippet || '';
+      const expandBtn = el.querySelector('.js-expand');
+      const full = el.querySelector('.js-full');
+      full.textContent = c.snippet || '';
+      expandBtn.addEventListener('click', () => {
+        full.classList.toggle('hidden');
+        expandBtn.textContent = full.classList.contains('hidden') ? '▾ expand' : '▴ collapse';
+      });
+      return el;
+    }
+
+    function renderResult(result) {
+      const verifiedSet = new Set(result.citations || []);
+      const unverifiedSet = new Set(result.unverified_citations || []);
+
+      if (unverifiedSet.size) {
+        banner.classList.remove('hidden');
+        bannerText.textContent = `The model emitted ${[...unverifiedSet].map(c => '[' + c + ']').join(' ')} which were not in the retrieved context. Treat those specific claims with caution.`;
+      } else {
+        banner.classList.add('hidden');
+      }
+
+      answerArea.innerHTML = '';
+      const card = document.createElement('div');
+      card.className = 'p-5 rounded-lg bg-[color:var(--bg-card)] border border-[color:var(--border-card)] markdown';
+      card.innerHTML = renderAnswerHtml(result.answer, verifiedSet);
+      answerArea.appendChild(card);
+
+      card.querySelectorAll('a[data-cite]').forEach(a => {
+        a.addEventListener('click', ev => {
+          ev.preventDefault();
+          const id = a.dataset.cite;
+          const target = document.getElementById('cite-' + cssEscape(id));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            target.classList.add('highlighted');
+            setTimeout(() => target.classList.remove('highlighted'), 1800);
+          }
+        });
+      });
+
+      citationsList.innerHTML = '';
+      citationsSummary.textContent = ` · ${result.context.length} sources${unverifiedSet.size ? ' · ⚠ ' + unverifiedSet.size + ' unverified' : ' · all verified ●'}`;
+      result.context.forEach(c => citationsList.appendChild(renderCitationCard(c, verifiedSet, unverifiedSet)));
+
+      const t = result.timings || {}, u = result.usage || {};
+      metaStrip.innerHTML = `
+        <div><span class="text-[color:var(--text-secondary)] font-medium">${escapeHtml(result.model)}</span> · today ${escapeHtml(result.today_iso)} · ${result.context.length} ctx docs</div>
+        <div class="mt-0.5">retrieve ${(t.retrieve_seconds||0).toFixed(2)}s · llm ${(t.llm_seconds||0).toFixed(2)}s · ${u.prompt_tokens||0}→${u.completion_tokens||0} tok${u.cost != null ? ' · $' + Number(u.cost).toFixed(4) : ''}</div>`;
+      metaStrip.classList.remove('hidden');
+
+      if (result.today_iso) $('#today-display').textContent = result.today_iso;
+      $('#today-note').textContent = '';
+    }
+
+    let inFlight = false;
+    async function submitQuestion(q) {
+      if (inFlight) return;
+      const question = (q || textarea.value).trim();
+      if (!question) return;
+      textarea.value = question;
+      renderSkeleton();
+      inFlight = true;
+      submitBtn.disabled = true;
+      submitLabel.textContent = 'thinking…';
+      try {
+        const resp = await fetch('/api/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question }),
+        });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${await resp.text()}`);
+        renderResult(await resp.json());
+      } catch (err) {
+        answerArea.innerHTML = '';
+        const errCard = document.createElement('div');
+        errCard.className = 'p-4 rounded-lg border';
+        errCard.style.background = '#2e0808';
+        errCard.style.borderColor = '#4a1414';
+        errCard.innerHTML = `<div class="text-[13px] text-red-300"><div class="font-medium mb-1">Request failed</div>${escapeHtml(err.message)}</div>`;
+        answerArea.appendChild(errCard);
+        citationsList.innerHTML = '';
+      } finally {
+        inFlight = false;
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'ask ▸';
+      }
+    }
+
+    form.addEventListener('submit', ev => { ev.preventDefault(); submitQuestion(); });
+    textarea.addEventListener('keydown', ev => {
+      if (ev.key === 'Enter' && !ev.shiftKey) { ev.preventDefault(); submitQuestion(); }
+    });
+
+    $('#today-display').textContent = '—';
+    $('#today-note').textContent = '(set after first ask)';
+    renderEmptyState();
+  </script>
+
+</body>
+</html>
