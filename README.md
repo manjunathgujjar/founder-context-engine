@@ -47,7 +47,7 @@ cp .env.example .env
 uv sync                          # installs runtime deps
 uv sync --extra dev              # adds pytest + ruff (optional)
 
-python scripts/ingest.py         # populates data/app.db
+uv run python scripts/ingest.py  # populates data/app.db
 uv run uvicorn app.main:app --reload    # → http://localhost:8000
 ```
 
