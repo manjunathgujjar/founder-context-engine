@@ -48,10 +48,10 @@ uv sync                          # installs runtime deps
 uv sync --extra dev              # adds pytest + ruff (optional)
 
 python scripts/ingest.py         # populates data/app.db
-uvicorn app.main:app --reload    # → http://localhost:8000
+uv run uvicorn app.main:app --reload    # → http://localhost:8000
 ```
 
-The ingest step downloads the MiniLM model (~80 MB) on first run and caches it.
+The ingest step downloads the MiniLM model (~80 MB) on first run and caches it. If port 8000 is occupied, use `uv run uvicorn app.main:app --reload --port 8123`.
 
 ### `.env`
 

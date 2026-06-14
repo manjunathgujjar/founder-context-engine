@@ -67,7 +67,9 @@ def main() -> int:
     with connect() as conn:
         conn.execute("BEGIN")
         conn.execute("DELETE FROM documents")
+        conn.execute("DELETE FROM answer_cache")
         clear_chunks(conn)
+        print("  cache cleared")
 
         for source, filename in CONNECTORS:
             path = fixtures_dir / filename
