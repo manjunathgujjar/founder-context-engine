@@ -38,6 +38,22 @@ def test_duplicate_events_cross_source(require_ingested_db):
     assert len(sources) >= 2, f"expected cross-source recall, got sources={sources}"
 
 
+def test_literal_ticket_id_surfaces_via_fts(require_ingested_db):
+    """A founder typing the raw ticket ID 'ENG-142' must find linear:ENG-142.
+
+    Regression for the FTS escape bug where '-' was stripped from query tokens,
+    flattening 'ENG-142' to 'ENG142' (one token) which never matched the index's
+    tokenized [ENG, 142]. The fix preserves '-' so the quoted phrase tokenizes
+    the same way on both sides.
+    """
+    with connect() as conn:
+        hits = hybrid_search(conn, "ENG-142", top_k=8)
+    ids = _doc_ids(hits)
+    assert "linear:ENG-142" in ids, f"literal ticket-id query missed ENG-142: {ids}"
+    top = hits[0]
+    assert top.fts_rank is not None, "FTS lane should hit on a literal ticket id"
+
+
 def test_off_topic_does_not_surface_eng142(require_ingested_db):
     """Wifi/office query has no overlap with the blocked-Stripe-webhook ticket;
     ENG-142 must not appear in the off-topic top-8."""

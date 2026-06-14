@@ -290,7 +290,7 @@ def get_stats(conn: sqlite3.Connection) -> dict:
     }
 
 
-_FTS_BAD = set('"():*^+-')
+_FTS_BAD = set('"():*^+')
 
 
 def _escape_fts(query: str) -> str:
@@ -298,7 +298,10 @@ def _escape_fts(query: str) -> str:
 
     FTS5 has its own query syntax (NEAR, column filters, quoted phrases).
     We coerce arbitrary user input into a safe OR of bare terms, dropping
-    operator characters that would otherwise raise SQLite errors.
+    operator characters that would otherwise raise SQLite errors. Hyphens
+    are preserved: the unicode61 tokenizer treats `-` as a separator at both
+    index AND query time, so a quoted phrase like "ENG-142" tokenizes into
+    [ENG, 142] on both sides and the phrase match resolves correctly.
     """
     tokens = []
     for raw in query.split():
