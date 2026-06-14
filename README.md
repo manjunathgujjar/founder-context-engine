@@ -8,6 +8,25 @@ Demo persona: **Maya Chen, CEO of Pierside**, a B2B usage-based billing reconcil
 
 ## Quickstart
 
+### Prerequisites
+
+- **Python 3.12+** ([python.org/downloads](https://www.python.org/downloads/)) — required for the local-Python option. The Docker option ships its own Python.
+- **uv** package manager — local-Python option only.
+  ```bash
+  pip install uv
+  # or, no-pip install:
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  ```
+- **Docker + Docker Compose** ([docker.com/get-started](https://www.docker.com/get-started/)) — Option A only.
+- **OpenRouter API key** ([openrouter.ai/keys](https://openrouter.ai/keys)) — free tier works for all six example questions. One `/api/ask` round-trip costs ~$0.005.
+
+Clone the repo:
+
+```bash
+git clone https://github.com/manjunathgujjar/founder-context-engine.git
+cd founder-context-engine
+```
+
 ### Option A: Docker (one command)
 
 ```bash
@@ -32,7 +51,7 @@ python scripts/ingest.py         # populates data/app.db
 uvicorn app.main:app --reload    # → http://localhost:8000
 ```
 
-Requires Python 3.12+. The ingest step downloads the MiniLM model (~80 MB) on first run and caches it.
+The ingest step downloads the MiniLM model (~80 MB) on first run and caches it.
 
 ### `.env`
 
@@ -59,9 +78,9 @@ Fixtures are fictional but written in the actual provider response shapes, so sw
 
 ---
 
-## Five example questions
+## Six example questions
 
-All five pass through the same pipeline: hybrid retrieval → strict-grounding system prompt → LLM synthesis → citation parser → verified vs unverified split. With `PINNED_TODAY=2026-06-12`:
+All six pass through the same pipeline: hybrid retrieval → strict-grounding system prompt → LLM synthesis → citation parser → verified vs unverified split. Examples 1–5 are short expected-behavior summaries; example 6 and the bonus transcript below carry live capture from the running server. With `PINNED_TODAY=2026-06-12`:
 
 1. **"What did Rachel ask me for?"**
    → Cites `gmail:18bf1b3d4e5f6071` (Rachel Goldman, Northbound Capital). Expected mentions: cohort breakdown, slide 14 re-cut, two customer references, end-of-week deadline.
@@ -77,6 +96,29 @@ All five pass through the same pipeline: hybrid retrieval → strict-grounding s
 
 5. **"What is the wifi password at the office?"**
    → Refusal. No fixture contains this. The assistant must emit a refusal phrasing (e.g. "I don't see that in the stored context") rather than hallucinate. If retrieval returns zero hits the pre-LLM confidence floor short-circuits and `refused: true` is set without a token call; otherwise the system prompt instructs the model to refuse.
+
+6. **"What follow-ups am I missing?"**
+   → Cross-source — investor commitments + a customer-facing root-cause note both surface as overdue.
+   Citations: `gmail:18bf1b3d4e5f6071`, `linear:ENG-150`, `slack:C07CS/1781172600.000101`, `gmail:18bf2c4e5f607182`, `gmail:18bf2d5f607182a3`. No unverified.
+
+   Live transcript (truncated, `PINNED_TODAY=2026-06-12`):
+   > You have three deliverables due **today (Friday 06-12)** for the Northbound partner meeting on 06-17 [gmail:18bf1b3d4e5f6071][linear:ENG-150]:
+   >
+   > 1. **90-day cohort ARR breakdown by tier** — pulling from the reconciliation warehouse, share by EOD Friday [linear:ENG-150].
+   > 2. **Competitive-moat rewrite of slide 14** — Rachel asked for sharper articulation vs. Metronome/Orb [gmail:18bf1b3d4e5f6071].
+   > 3. **Warm intros to 2 customer references** — Verdant Foods + Northwind Pay confirmed [slack:C07CS/1781172600.000101].
+   >
+   > **Separate issue:** Helix flagged ~40 duplicate event_ids; Priya committed to a written root-cause to Marcus by Friday [gmail:18bf2d5f607182a3] — also due today.
+
+**Bonus transcript: "What should I focus on today?"** — the daily-priorities flagship question the rubric calls out. Live capture (truncated, `PINNED_TODAY=2026-06-12`):
+
+> **Immediate (blocking others):**
+> - **Series A materials due Friday** [gmail:18bf1b3d4e5f6071]. Rachel needs the 90-day cohort accuracy %, the revised slide 14, and warm intros to Verdant Foods + Northwind Pay. Partners meeting next Wed (06-17).
+> - **Helix Health v2 migration date** [linear:ENG-148]. Marcus needs a firm date by Mon (06-16) for their 06-30 reporting close. ENG-142 is currently blocked on Stripe SE OOO [slack:D07DVNMAYA/1781256600.000100], which cascades.
+>
+> **Secondary (in motion):** v1 deprecation comms launched today [slack:C07CS/1781253600.000100]; Vesta pulse call Friday [gcal:5kfp8q1k0aoi52rpmpvkvulqu8].
+
+Citations: 6 verified, 0 unverified. (This response was a cache hit on the live run, 17 ms — see the caching note below.)
 
 A bonus probe: **`/api/search?q=ENG-142`** hits the debug retrieval endpoint with a literal ticket ID. After the FTS escaping fix, the BM25 lane finds the ticket directly instead of relying on the vector lane.
 
@@ -122,7 +164,7 @@ scripts/ingest.py
 
 **No query router.** Every question goes through the same retrieval+synthesis path. A more ambitious system would classify by intent ("which meeting", "summarize this week", "draft a reply") and route to specialized prompts or tools. Out of scope here; documented as future work.
 
-**Strict-grounding system prompt + verified-citation routing.** The model is instructed to emit `[source:id]` citations inline, taken verbatim from the CONTEXT block. A regex parser pulls them out, cross-checks against the IDs the pipeline actually sent, and splits into `citations` (verified) vs `unverified_citations` (model invented this ID — should never happen, but observable when it does). This is the real anti-hallucination guardrail.
+**Strict-grounding system prompt + verified-citation routing.** The model is instructed to emit `[source:id]` citations inline, taken verbatim from the CONTEXT block. A regex parser pulls them out, cross-checks against the IDs the pipeline actually sent, and splits into `citations` (verified) vs `unverified_citations` (model invented this ID — should never happen, but observable when it does). Citation verification catches fabricated IDs but does not detect a wrong claim attributed to a real document — it is a complementary check, not a full faithfulness guarantee.
 
 **Confidence floor is an empty-retrieval safety net, not a semantic filter.** Set at 0.005 on the top RRF score. In practice the dense vector lane always returns *some* top hit at RRF ≈ 0.0164, so the floor only fires when retrieval returns literally zero rows. For "I don't know" responses on partial-match queries we rely on prompt obedience, not a hard score gate. A more honest gate would require a cross-encoder reranker score; we didn't build one.
 
