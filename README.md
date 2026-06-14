@@ -159,4 +159,4 @@ The eval harness exits 1 on any failure, so it's CI-shaped even though no CI is 
 
 ## Traces
 
-AI-assisted development workflow: **[LINK — paste your traces.com link here before submitting]**
+AI-assisted development workflow: **https://traces.com/s/jn74a7az1hxg3xc4jmad66h7tx88m4vh**
